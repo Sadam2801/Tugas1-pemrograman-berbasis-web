@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Login — SITTA</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="login-page">
+  <main class="login-shell" aria-labelledby="loginTitle">
+    <aside class="login-brand">
+      <div class="logo-badge">
+        <img src="assets/logo-ut-small-transparent.png.webp" height="72" alt="Logo Universitas Terbuka">
+      </div>
+      <h1 id="loginTitle">SIT<span>TA</span></h1>
+      <p>Sistem Informasi Tiras dan Transaksi Bahan Ajar Universitas Terbuka.</p>
+      <ul>
+        <li>Pantau stok bahan ajar</li>
+        <li>Lacak pengiriman dengan nomor DO</li>
+        <li>Laporan dan histori transaksi</li>
+      </ul>
+    </aside>
+
+    <section class="card" aria-labelledby="formTitle">
+      <h2 id="formTitle">Selamat datang kembali</h2>
+      <p class="hint" style="margin:0 0 22px">Masukkan email dan kata sandi Anda untuk melanjutkan.</p>
+
+      <form id="loginForm" novalidate>
+        <div>
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" inputmode="email" autocomplete="username" placeholder="nama@email.com" required aria-describedby="emailHelp emailError">
+          <div id="emailHelp" class="hint small">Gunakan format email yang valid.</div>
+          <div id="emailError" class="error" aria-live="polite"></div>
+        </div>
+
+        <div>
+          <label for="password">Kata sandi</label>
+          <div class="pwd-wrap">
+            <input id="password" name="password" type="password" placeholder="Kata sandi" required autocomplete="current-password" aria-describedby="pwdHelp pwdError">
+            <button type="button" class="password-toggle" id="togglePwd" aria-pressed="false" aria-label="Tampilkan kata sandi">👁️</button>
+          </div>
+          <div id="pwdHelp" class="hint small">Minimal 8 karakter, minimal 1 huruf besar & 1 angka.</div>
+          <div id="pwdError" class="error" aria-live="polite"></div>
+          <div style="display:flex; justify-content:flex-end;">
+            <button id="forgotBtn" type="button" class="text-secondary">Lupa kata sandi?</button>
+          </div>
+        </div>
+
+        <button id="submitBtn" type="submit">Masuk</button>
+
+        <div id="formMessage" role="status" aria-live="polite"></div>
+
+        <p class="login-footer">
+          Belum punya akun?
+          <button id="registerBtn" type="button" class="text-secondary">Daftar</button>
+        </p>
+      </form>
+    </section>
+  </main>
+
+  <!-- Model Lupa Password -->
+  <dialog id="forgotDialog">
+    <div class="modal-box">
+      <button type="button" class="close-btn" id="closeForgot" aria-label="Tutup">✖</button>
+      <h3 class="modal-header">Lupa Password</h3>
+      <form id="forgotForm" class="modal-body" novalidate>
+        <p class="hint small">Masukkan email Anda untuk mengatur ulang kata sandi.</p>
+        <input type="email" id="forgotEmail" placeholder="Email Anda" aria-label="Email Anda" required>
+        <button id="sendResetBtn" type="submit">Kirim Link Reset</button>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- Model Daftar -->
+  <dialog id="registerDialog">
+    <div class="modal-box">
+      <button type="button" class="close-btn" id="closeRegister" aria-label="Tutup">✖</button>
+      <h3 class="modal-header">Daftar Akun Baru</h3>
+      <form id="registerForm" class="modal-body" novalidate>
+        <input type="text" id="regName" placeholder="Nama Lengkap" aria-label="Nama Lengkap" required>
+        <input type="email" id="regEmail" placeholder="Email" aria-label="Email" required>
+        <input type="password" id="regPassword" placeholder="Kata Sandi" aria-label="Kata Sandi" required>
+        <button type="submit">Daftar Sekarang</button>
+      </form>
+    </div>
+  </dialog>
+
+  <script src="js/data.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard | Universitas Terbuka</title>
+  <link rel="stylesheet" href="css/dashboard.css" />
+
+  <!-- Internal CSS: khusus modal laporan di halaman ini -->
+  <style>
+    dialog {
+      border: none;
+      border-radius: 16px;
+      padding: 24px;
+      width: min(900px, 92vw);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    }
+    dialog::backdrop {
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(2px);
+    }
+    dialog h2 {
+      margin-top: 0;
+      color: var(--primary);
+    }
+    .close-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: transparent;
+      color: red;
+      font-size: 1.2rem;
+    }
+    .table-wrap {
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+      font-size: 14px;
+      border-bottom: 1px solid #e6e9ef;
+    }
+    thead {
+      background: var(--primary);
+      color: #fff;
+    }
+    tfoot td {
+      font-weight: bold;
+    }
+    progress {
+      width: 120px;
+      accent-color: var(--primary);
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="brand">
+      <img src="assets/logo-ut-small-transparent.png.webp" alt="Logo Universitas Terbuka">
+      SIT<span>TA</span>
+    </div>
+
+    <nav aria-label="Menu utama">
+      <ul class="nav-menu">
+        <li><a class="nav-link" href="stok.html">Informasi Bahan Ajar</a></li>
+        <li><a class="nav-link" href="tracking.html">Tracking Pengiriman</a></li>
+        <li>
+          <button type="button" class="nav-link" id="laporanToggle" aria-expanded="false" aria-controls="laporanSubmenu">Laporan ▾</button>
+          <ul class="dropdown" id="laporanSubmenu" hidden>
+            <li><button type="button" class="report-btn" data-report="monitoring">Monitoring Progress DO Bahan Ajar</button></li>
+            <li><button type="button" class="report-btn" data-report="rekap">Rekap Bahan Ajar</button></li>
+          </ul>
+        </li>
+        <li><button type="button" class="nav-link report-btn" data-report="histori">Histori Transaksi Bahan Ajar</button></li>
+      </ul>
+    </nav>
+
+    <div class="user">
+      <span class="avatar" id="userAvatar" aria-hidden="true"></span>
+      <span class="user-name" id="userName"></span>
+      <button id="btn-logout" type="button">Logout</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-label="Sambutan">
+      <div>
+        <h1 class="greeting" id="greeting"></h1>
+        <p>Selamat datang di Dashboard Aplikasi SITTA Universitas Terbuka.</p>
+      </div>
+      <div class="hero-time">
+        <div class="clock" id="clock"></div>
+        <p id="todayDate"></p>
+      </div>
+    </section>
+
+    <section class="stats" aria-label="Ringkasan">
+      <div class="stat-box">
+        <span class="stat-icon" aria-hidden="true">📚</span>
+        <div>
+          <div class="stat-number" id="statBahanAjar">0</div>
+          <p>Bahan Ajar Aktif</p>
+        </div>
+      </div>
+      <div class="stat-box">
+        <span class="stat-icon" aria-hidden="true">🚚</span>
+        <div>
+          <div class="stat-number" id="statDikirim">0</div>
+          <p>Dalam Pengiriman</p>
+        </div>
+      </div>
+      <div class="stat-box">
+        <span class="stat-icon" aria-hidden="true">✅</span>
+        <div>
+          <div class="stat-number" id="statSelesai">0</div>
+          <p>Sudah Selesai</p>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="menuTitle">
+      <h2 class="section-title" id="menuTitle">Akses Cepat</h2>
+      <div class="container">
+        <a class="card" href="stok.html">
+          <span class="card-icon" aria-hidden="true">📚</span>
+          <h3>Informasi Bahan Ajar</h3>
+          <p>Lihat daftar dan detail bahan ajar yang tersedia.</p>
+        </a>
+        <a class="card" href="tracking.html">
+          <span class="card-icon" aria-hidden="true">🚚</span>
+          <h3>Tracking Pengiriman</h3>
+          <p>Pantau proses pengiriman bahan ajar ke tujuan.</p>
+        </a>
+        <button type="button" class="card report-btn" data-report="monitoring">
+          <span class="card-icon" aria-hidden="true">📈</span>
+          <h3>Monitoring Progress DO</h3>
+          <p>Laporan progress setiap Delivery Order bahan ajar.</p>
+        </button>
+        <button type="button" class="card report-btn" data-report="rekap">
+          <span class="card-icon" aria-hidden="true">📋</span>
+          <h3>Rekap Bahan Ajar</h3>
+          <p>Laporan rekapitulasi stok seluruh bahan ajar.</p>
+        </button>
+        <button type="button" class="card report-btn" data-report="histori">
+          <span class="card-icon" aria-hidden="true">🧾</span>
+          <h3>Histori Transaksi Bahan Ajar</h3>
+          <p>Lihat riwayat transaksi bahan ajar sebelumnya.</p>
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal laporan -->
+  <dialog id="reportDialog" aria-labelledby="reportTitle">
+    <button type="button" class="close-btn" id="closeReport" aria-label="Tutup">✖</button>
+    <h2 id="reportTitle"></h2>
+    <div class="table-wrap" id="reportContent"></div>
+  </dialog>
+
+  <footer>
+    © 2025 Universitas Terbuka — Sistem Distribusi Bahan Ajar
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

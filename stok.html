@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stock Bahan Ajar | UT</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <h1>Stock Bahan Ajar</h1>
+  </header>
+
+  <main class="container">
+  <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;">
+    <button id="btnAdd">+ Tambah Barang</button>
+    <a href="dashboard.html" style="color:var(--primary); text-decoration:underline; font-weight:500;">Kembali ke Dashboard</a>
+  </div>
+
+  <table style="margin-top:15px; border-radius:12px; overflow:hidden; box-shadow:0 8px 20px rgba(0,0,0,0.08); background:#fff;">
+    <thead style="background: linear-gradient(90deg, var(--primary), var(--secondary)); color:white;">
+      <tr>
+        <th>Kode Barang</th>
+        <th>Kode Lokasi</th>
+        <th>Nama Barang</th>
+        <th>Jenis Barang</th>
+        <th>Edisi</th>
+        <th>Stock</th>
+      </tr>
+    </thead>
+    <tbody id="stockTable">
+      <!-- Rows akan dirender oleh JS -->
+    </tbody>
+  </table>
+</main>
+
+<!-- Modal create -->
+<dialog id="stockDialog">
+  <div style="position:relative; background:rgba(255,255,255,0.95); backdrop-filter:blur(8px); border-radius:20px; padding:24px; width:900px;">
+    <button class="close-btn" id="closeDialog">✖</button>
+    <h3>Tambah Barang</h3>
+    <form id="stockForm" style="display:grid; gap:12px;">
+      <input type="text" id="kodeBarang" placeholder="Kode Barang" required style="padding:10px; border-radius:12px; border:1px solid var(--accent-600);">
+      <input type="text" id="kodeLokasi" placeholder="Kode Lokasi" required style="padding:10px; border-radius:12px; border:1px solid var(--accent-600);">
+      <input type="text" id="namaBarang" placeholder="Nama Barang" required style="padding:10px; border-radius:12px; border:1px solid var(--accent-600);">
+      <select id="jenisBarang" required style="padding:10px; border-radius:12px; border:1px solid var(--accent-600);">
+        <option value="">Pilih Jenis</option>
+        <option value="Buku">Buku</option>
+        <option value="CD">CD</option>
+        <option value="Lainnya">Lainnya</option>
+      </select>
+      <input type="text" id="edisi" placeholder="Edisi" required style="padding:10px; border-radius:12px; border:1px solid var(--accent-600);">
+      <input type="number" id="stock" placeholder="Stock" required min="0" style="padding:10px; border-radius:12px; border:1px solid var(--accent-600);">
+      <button type="submit" style="padding:12px; border-radius:14px; background: linear-gradient(90deg, var(--primary), var(--secondary)); font-weight:600;">Simpan</button>
+    </form>
+  </div>
+</dialog>
+
+  <script src="js/data.js"></script>
+  <script src="js/stock.js"></script>
+</body>
+</html>

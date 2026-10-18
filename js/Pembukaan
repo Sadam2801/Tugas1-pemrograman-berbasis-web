@@ -1,0 +1,63 @@
+Pembukaan
+
+Assalamualaikum Wr. Wb.
+
+Perkenalkan, nama saya Mentari,dengan NIM 055051386, dari program studi Sistem Informasi Universitas Terbuka. Pada video ini saya akan menunjukkan dan menjelaskan hasil Tugas Praktik 1 mata kuliah Pemrograman Berbasis Web.
+
+Aplikasi yang saya buat adalah website pemesanan bahan ajar SITTA. Sesuai arahan soal, aplikasi ini hanya front-end, dibuat dengan HTML, CSS, dan JavaScript DOM, tanpa back-end. Semua datanya dibaca dari file data.js, bukan dari database.
+
+
+Kita mulai dari halaman login. Di sini ada input email dan kata sandi, serta tombol Masuk. Saat saya mengetik, validasinya langsung berjalan: kalau format email salah atau kata sandi belum memenuhi syarat, pesan error muncul di bawah kolomnya.
+
+Sekarang saya coba login dengan data yang salah. Bisa dilihat, muncul pop-up alert bertuliskan "Email/password yang anda masukkan salah", sesuai permintaan soal.
+
+Di halaman ini juga ada tombol "Lupa kata sandi" dan "Daftar". Keduanya saya tampilkan dalam bentuk modal box. Kalau form di dalamnya diisi tidak benar, muncul alert juga.
+
+Sekarang saya login dengan akun yang benar, yaitu admin@gmail.com dengan kata sandi Password123.
+
+
+Setelah login, kita diarahkan ke halaman dashboard. Di bagian atas ada sapaan yang berubah sesuai waktu lokal, yaitu selamat pagi, siang, sore, atau malam, lengkap dengan jam dan tanggal hari ini.
+
+Di bawahnya ada ringkasan data: jumlah bahan ajar aktif, paket yang sedang dalam pengiriman, dan paket yang sudah selesai. Angka ini tidak saya tulis manual, tetapi dihitung oleh JavaScript dari data di data.js. Saat ini ada 3 bahan ajar, 2 pengiriman berjalan, dan 1 yang sudah selesai.
+
+Menu navigasinya saya letakkan di atas, berisi Informasi Bahan Ajar, Tracking Pengiriman, Laporan, dan Histori Transaksi Bahan Ajar. Menu Laporan berbentuk dropdown dengan dua pilihan, yaitu Monitoring Progress DO Bahan Ajar dan Rekap Bahan Ajar.
+
+
+Kita klik Informasi Bahan Ajar. Halaman ini menampilkan tabel stok bahan ajar. Baris tabelnya tidak ditulis di HTML, tetapi dibuat secara dinamis oleh JavaScript dari variabel dataBahanAjar di data.js.
+
+Untuk menambah data, klik tombol "Tambah Barang". Muncul modal berisi form: kode barang, kode lokasi, nama barang, jenis barang, edisi, dan stock.
+
+Kalau saya langsung klik Simpan tanpa mengisi apa-apa, muncul peringatan "Harap isi bidang ini". Kalau saya memasukkan kode barang yang sudah ada, misalnya BA001, muncul alert bahwa kode tersebut sudah terdaftar.
+
+Sekarang saya isi dengan benar: kode barang "BA004", kode lokasi "LOC03", nama barang "Pemrograman Web", jenis barang "Buku", edisi "1", dan stock "100". Setelah klik Simpan, muncul alert berhasil, dan baris barunya langsung tampil di tabel tanpa reload halaman.
+
+
+Kembali ke dashboard, lalu kita buka Tracking Pengiriman. Di sini kita memasukkan Nomor Delivery Order. Saya coba dengan "DO2025001", lalu klik Cari.
+
+Hasilnya muncul dalam modal: nama mahasiswa, status pengiriman yang saya tampilkan dengan progress bar dan daftar riwayat perjalanan paket, lalu detail ekspedisi, tanggal kirim, jenis paket, dan total pembayaran.
+
+Kalau nomor DO yang dimasukkan tidak ada, muncul pesan error berwarna merah bahwa data tidak ditemukan.
+
+
+Kembali ke dashboard, kita klik Laporan, lalu pilih Monitoring Progress DO Bahan Ajar. Muncul modal berisi tabel progress setiap Delivery Order.
+
+Pilihan kedua, Rekap Bahan Ajar, menampilkan rekap seluruh stok beserta total stoknya.
+
+Terakhir, Histori Transaksi Bahan Ajar menampilkan riwayat transaksi beserta total pembayarannya. Semua tabel ini juga dibuat oleh JavaScript dari data yang sama.
+
+
+Selanjutnya saya tunjukkan struktur kodenya. Strukturnya mengikuti arahan soal: ada empat file HTML, yaitu index.html untuk login, dashboard.html, tracking.html, dan stok.html, lalu folder css, js, dan assets untuk gambar logo.
+
+Untuk HTML, saya memakai elemen semantik seperti header, nav, main, section, dan footer, supaya struktur halamannya jelas. Untuk modal, saya memakai elemen dialog.
+
+Untuk CSS, saya memakai ketiga cara. External CSS ada di folder css, yaitu style.css dan dashboard.css. Internal CSS ada di dalam tag style pada dashboard.html, khusus untuk modal laporan. Inline CSS saya pakai untuk penyesuaian kecil, contohnya di stok.html. Tata letaknya saya atur dengan CSS grid dan flexbox supaya tetap rapi di layar kecil.
+
+Untuk JavaScript, saya pisahkan menjadi lima file supaya tiap halaman punya logikanya sendiri dan mudah dirawat: data.js untuk data dummy, script.js untuk login, dashboard.js, stock.js, dan tracking.js.
+
+Kita lihat salah satunya, script.js. Bagian awal mengambil elemen HTML berdasarkan ID dengan getElementById, misalnya form login, input email, dan input kata sandi. Lalu ada fungsi validasi email dan kata sandi. Saat form dikirim, datanya dicocokkan dengan dataUsers di data.js. Kalau cocok, pengguna diarahkan ke dashboard. Kalau tidak, muncul alert.
+
+Pola yang sama saya pakai di halaman lain: ambil elemen, baca data dari data.js, lalu tampilkan hasilnya ke halaman lewat DOM.
+
+Penutup
+
+Demikian penjelasan dari saya. Terima kasih atas waktunya, kurang lebihnya mohon maaf. Wassalamualaikum Wr. Wb.

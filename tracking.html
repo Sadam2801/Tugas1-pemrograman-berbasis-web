@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tracking Pengiriman | Universitas Terbuka</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="header">
+    <img src="assets/logo-ut-small-transparent.png.webp" alt="Logo UT" class="logo">
+    <h1>Tracking Pengiriman Bahan Ajar</h1>
+  </header>
+
+  <main class="container">
+    <section class="form-section card">
+      <h2>Cari Nomor Delivery Order</h2>
+      <form id="searchForm">
+        <label for="doInput">Nomor Delivery Order (DO)</label>
+        <input type="text" id="doInput" placeholder="Contoh: DO2025001" required>
+        <button type="submit">Cari</button>
+        <button type="button" onclick="window.location.href='dashboard.html'">Kembali</button>
+      </form>
+      <p id="feedback"></p>
+    </section>
+
+
+    <dialog id="trackingDialog" class="tracking-result">
+        <button class="close-btn" style="color: red;" id="closeDialog">✖</button>
+        <div id="trackingContent"></div>
+    </dialog>
+</main>
+
+  <footer>
+    © 2025 Universitas Terbuka — Sistem Distribusi Bahan Ajar
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/tracking.js"></script>
+</body>
+
+</html>
